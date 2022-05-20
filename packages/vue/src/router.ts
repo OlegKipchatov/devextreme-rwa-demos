@@ -1,15 +1,15 @@
-import CrmContactList from './views/crm-contact-list';
+import CrmContactList from './views/crm-contact-list.vue';
 import auth from "./auth";
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import defaultLayout from "./layouts/side-nav-outer-toolbar";
-import simpleLayout from "./layouts/single-card";
+import defaultLayout from "./layouts/side-nav-outer-toolbar.vue";
+import simpleLayout from "./layouts/single-card.vue";
 
-function loadView(view) {
+function loadView(view: string) {
   return () => import (/* webpackChunkName: "login" */ `./views/${view}.vue`)
 }
 
-const router = new createRouter({
+const router = createRouter({
   routes: [
     {
       path: "/login-form",
@@ -78,7 +78,6 @@ const router = new createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-
   if (to.name === "login-form" && auth.loggedIn()) {
     next({ name: "home" });
   }

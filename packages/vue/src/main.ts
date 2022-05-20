@@ -3,7 +3,7 @@ import './dx-styles.scss';
 import { createApp }  from "vue";
 import router from "./router";
 
-import App from "./App";
+import App from "./App.vue";
 import appInfo from "./app-info";
 
 const app = createApp(App);

@@ -5,19 +5,19 @@ const Breakpoints = {
   Large: "(min-width: 1280px)"
 };
 
-let handlers = [];
+let handlers: Function[] = [];
 const xSmallMedia = window.matchMedia(Breakpoints.XSmall);
 const smallMedia = window.matchMedia(Breakpoints.Small);
 const mediumMedia = window.matchMedia(Breakpoints.Medium);
 const largeMedia = window.matchMedia(Breakpoints.Large);
 
 [xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach(media => {
-  media.addListener(() => {
+  media.addEventListener("change", () => {
     handlers.forEach(handler => handler());
-  });
+  })
 });
 
-export const sizes = () => {
+export const sizes = (): Record<string, boolean> => {
   return {
     "screen-x-small": xSmallMedia.matches,
     "screen-small": smallMedia.matches,
@@ -26,8 +26,8 @@ export const sizes = () => {
   };
 };
 
-export const subscribe = handler => handlers.push(handler);
+export const subscribe = (handler: Function) => handlers.push(handler);
 
-export const unsubscribe = handler => {
+export const unsubscribe = (handler: Function) => {
   handlers = handlers.filter(item => item !== handler);
 };

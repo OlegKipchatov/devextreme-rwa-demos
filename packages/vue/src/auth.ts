@@ -1,15 +1,22 @@
+export interface IUser {
+  email: string;
+  name?: string;
+  avatarUrl?: string
+}
+
 const defaultUser = {
   email: 'sandra@example.com',
   avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/06.png'
 };
 
-export default {
-  _user: defaultUser,
-  loggedIn() {
-    return !!this._user;
-  },
+class Auth {
+  private _user: IUser | null = defaultUser;
 
-  async logIn(email, password) {
+  loggedIn = () => {
+    return !!this._user;
+  };
+
+  logIn = async (email: string, password: string) => {
     try {
       // Send request
       console.log(email, password);
@@ -26,13 +33,13 @@ export default {
         message: "Authentication failed"
       };
     }
-  },
+  };
 
-  async logOut() {
+  logOut = async () => {
     this._user = null;
-  },
+  };
 
-  async getUser() {
+  getUser = async () => {
     try {
       // Send request
 
@@ -46,9 +53,9 @@ export default {
         isOk: false
       };
     }
-  },
+  };
 
-  async resetPassword(email) {
+  resetPassword = async (email: string) => {
     try {
       // Send request
       console.log(email);
@@ -63,9 +70,9 @@ export default {
         message: "Failed to reset password"
       };
     }
-  },
+  };
 
-  async changePassword(email, recoveryCode) {
+  changePassword = async (email: string, recoveryCode: string) => {
     try {
       // Send request
       console.log(email, recoveryCode);
@@ -80,9 +87,9 @@ export default {
         message: "Failed to change password"
       }
     }
-  },
+  };
 
-  async createAccount(email, password) {
+  createAccount = async (email: string, password: string) => {
     try {
       // Send request
       console.log(email, password);
@@ -97,5 +104,7 @@ export default {
         message: "Failed to create account"
       };
     }
-  }
+  };
 };
+
+export default new Auth();
